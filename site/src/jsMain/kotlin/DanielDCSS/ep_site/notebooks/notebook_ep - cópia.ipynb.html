@@ -1,0 +1,170 @@
+<html>
+<head>
+<title>notebook_ep.ipynb</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #2aacb8;}
+.s5 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+notebook_ep.ipynb</font>
+</center></td></tr></table>
+<pre><span class="s0">#%% md 
+</span><span class="s1"># Ep 1  
+Aluno : Daniel Carlos Souza Santos &lt;br /&gt; 
+$N_{usp}$ : 13686330 
+</span><span class="s0">#%% md 
+</span><span class="s1">### Dependências  
+Kotlin.math é uma biblioteca que contém os métodos matemáticos exigidos para o ep. Letsplot é uma biblioteca para exportação gráfica 
+</span><span class="s0">#%% 
+</span><span class="s2">%</span><span class="s1">use lets</span><span class="s2">-</span><span class="s1">plot</span>
+<span class="s1">import kotlin</span><span class="s2">.</span><span class="s1">math</span><span class="s2">.</span><span class="s1">pow</span>
+<span class="s1">import kotlin</span><span class="s2">.</span><span class="s1">math</span><span class="s2">.</span><span class="s1">cos</span>
+<span class="s1">import kotlin</span><span class="s2">.</span><span class="s1">math</span><span class="s2">.</span><span class="s1">sin</span>
+<span class="s1">import kotlin</span><span class="s2">.</span><span class="s1">math</span><span class="s2">.</span><span class="s1">sign</span>
+<span class="s1">import org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">letsPlot</span><span class="s2">.</span><span class="s1">export</span><span class="s2">.</span><span class="s1">ggsave</span>
+<span class="s1">import org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">letsPlot</span><span class="s2">.</span><span class="s1">geom</span><span class="s2">.</span><span class="s1">geomLine</span>
+<span class="s1">import org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">letsPlot</span><span class="s2">.</span><span class="s1">letsPlot</span>
+<span class="s1">import org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">letsPlot</span><span class="s2">.</span><span class="s1">label</span><span class="s2">.</span><span class="s1">ggtitle</span>
+<span class="s1">import org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">letsPlot</span><span class="s2">.</span><span class="s1">label</span><span class="s2">.</span><span class="s1">xlab</span>
+<span class="s1">import org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">letsPlot</span><span class="s2">.</span><span class="s1">label</span><span class="s2">.</span><span class="s1">ylab</span>
+<span class="s1">import org</span><span class="s2">.</span><span class="s1">jetbrains</span><span class="s2">.</span><span class="s1">letsPlot</span><span class="s2">.</span><span class="s1">scale</span><span class="s2">.</span><span class="s1">scaleXContinuous</span>
+
+<span class="s0">#%% md 
+</span><span class="s1">## Exercício 1  
+### Ítem (a) 
+Para resolver a equação $ x^{\frac{3}{4}} - cos(x^{2}) = 0 $ vamos dizer que $ x_1 $ é um ponto mais a esquerda que $ x_2 $ sempre. Seja $ f(x) = x^{\frac{3}{4}} - cos(x^{2}) $. O programa abaixo cria uma função que calcula a média de 2 valores e outra que corresponde a função do enunciado. Plotando a função do enunciado no seu respectivo domínio. 
+</span><span class="s0">#%% 
+</span><span class="s3">fun </span><span class="s1">target</span><span class="s2">( </span><span class="s1">x : Double </span><span class="s2">) </span><span class="s1">: Double </span><span class="s2">{</span>
+    <span class="s3">return </span><span class="s1">x</span><span class="s2">.</span><span class="s1">pow</span><span class="s2">(</span><span class="s4">3.0</span><span class="s2">/</span><span class="s4">4.0</span><span class="s2">) - </span><span class="s1">cos</span><span class="s2">(</span><span class="s1">x</span><span class="s2">.</span><span class="s1">pow</span><span class="s2">(</span><span class="s4">2.0</span><span class="s2">))</span>
+<span class="s2">}</span>
+<span class="s3">fun </span><span class="s1">x_med</span><span class="s2">( </span><span class="s1">a : Double</span><span class="s2">, </span><span class="s1">b : Double</span><span class="s2">) </span><span class="s1">: Double </span><span class="s2">{</span>
+    <span class="s3">return </span><span class="s2">( </span><span class="s1">a </span><span class="s2">+ </span><span class="s1">b </span><span class="s2">)/ </span><span class="s4">2.0</span>
+<span class="s2">}</span>
+
+<span class="s3">val </span><span class="s1">xs </span><span class="s2">= (</span><span class="s4">0</span><span class="s2">..</span><span class="s4">300</span><span class="s2">).</span><span class="s1">map </span><span class="s2">{ </span><span class="s1">it </span><span class="s2">/ </span><span class="s4">10.0 </span><span class="s2">}</span>
+<span class="s3">var </span><span class="s1">ys </span><span class="s2">= </span><span class="s1">xs</span><span class="s2">.</span><span class="s1">map </span><span class="s2">{ </span><span class="s1">target</span><span class="s2">(</span><span class="s1">it</span><span class="s2">) }</span>
+
+<span class="s3">val </span><span class="s1">data </span><span class="s2">= </span><span class="s1">mapOf</span><span class="s2">(</span>
+    <span class="s5">&quot;x&quot; </span><span class="s1">to xs</span><span class="s2">,</span>
+    <span class="s5">&quot;y&quot; </span><span class="s1">to ys</span>
+<span class="s2">)</span>
+
+<span class="s3">val </span><span class="s1">plot </span><span class="s2">= </span><span class="s1">letsPlot</span><span class="s2">(</span><span class="s1">data</span><span class="s2">) + </span><span class="s1">geomLine </span><span class="s2">{</span>
+    <span class="s1">x </span><span class="s2">= </span><span class="s5">&quot;x&quot;</span>
+    <span class="s1">y </span><span class="s2">= </span><span class="s5">&quot;y&quot;</span>
+<span class="s2">} + </span><span class="s1">ggtitle</span><span class="s2">(</span><span class="s5">&quot;Plot da função target(x)&quot;</span><span class="s2">) + </span><span class="s1">xlab</span><span class="s2">(</span><span class="s5">&quot;x&quot;</span><span class="s2">) + </span><span class="s1">ylab</span><span class="s2">(</span><span class="s5">&quot;target(x)&quot;</span><span class="s2">)</span>
+
+<span class="s1">plot</span>
+
+
+<span class="s0">#%% 
+</span><span class="s3">var </span><span class="s1">x_1 : Double </span><span class="s2">= </span><span class="s4">0.0</span>
+<span class="s3">var </span><span class="s1">x_2 : Double </span><span class="s2">= </span><span class="s4">1.0</span>
+<span class="s3">val </span><span class="s1">err  </span><span class="s2">= </span><span class="s4">0.000001</span>
+<span class="s0">// Essa parte do código inicializa x1 e x2. Após atualiza x1 e xx2 conforme indicado pelo método da bissecção</span>
+<span class="s3">while </span><span class="s2">(</span><span class="s1">Math</span><span class="s2">.</span><span class="s1">abs</span><span class="s2">(</span><span class="s1">x_1 </span><span class="s2">- </span><span class="s1">x_2</span><span class="s2">) &gt; </span><span class="s1">err</span><span class="s2">){</span>
+    <span class="s3">if</span><span class="s2">(</span><span class="s1">sign</span><span class="s2">(</span><span class="s1">target</span><span class="s2">(</span><span class="s1">x_1</span><span class="s2">)) ==  </span><span class="s1">sign</span><span class="s2">(</span><span class="s1">target</span><span class="s2">(</span><span class="s1">x_med</span><span class="s2">(</span><span class="s1">x_1</span><span class="s2">, </span><span class="s1">x_2</span><span class="s2">))) ){</span>
+        <span class="s1">x_1 </span><span class="s2">= </span><span class="s1">x_med</span><span class="s2">(</span><span class="s1">x_1</span><span class="s2">, </span><span class="s1">x_2</span><span class="s2">)</span>
+    <span class="s2">}</span><span class="s3">else</span><span class="s2">{</span>
+        <span class="s1">x_2 </span><span class="s2">= </span><span class="s1">x_med</span><span class="s2">(</span><span class="s1">x_1</span><span class="s2">, </span><span class="s1">x_2</span><span class="s2">)</span>
+    <span class="s2">}</span>
+    <span class="s1">println</span><span class="s2">(</span><span class="s5">&quot;x1: </span><span class="s3">$</span><span class="s1">x_1</span><span class="s5">&quot;</span><span class="s2">)</span>
+    <span class="s1">println</span><span class="s2">(</span><span class="s5">&quot;x2: </span><span class="s3">$</span><span class="s1">x_2</span><span class="s5">&quot;</span><span class="s2">)</span>
+    <span class="s1">println</span><span class="s2">(</span><span class="s5">&quot;xMed: </span><span class="s3">${</span><span class="s1">x_med</span><span class="s2">(</span><span class="s1">x_1</span><span class="s2">, </span><span class="s1">x_2</span><span class="s2">)</span><span class="s3">}</span><span class="s5">&quot;</span><span class="s2">)</span>
+<span class="s2">}</span>
+
+<span class="s0">#%% md 
+</span><span class="s1">Não existem outras raizes pois a função não é devinida para numéros negativos e é crescente na medida que x cresce. &lt;br /&gt; 
+Resposta encontrada : 0.7743964195251465 
+ 
+</span><span class="s0">#%% md 
+</span><span class="s1">## Item (b) 
+A derivada da função do ítem (a) é : $f'(x) = \frac{3}{4}x^{\frac{-1}{4}} + 2x*sen(x^{2})$, a qual foi calculada analíticamente. Para o método de Newton vamos usar o programa a seguir cujo o algoritmo replica exatamente $x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$ parando apenas quando $f(x_{n+1})$ está convenientemente próxima de 0. Ao final pode-se notar que ambos os métodos convergiram para valores próximos. 
+ 
+</span><span class="s0">#%% 
+</span><span class="s3">fun </span><span class="s1">target_line</span><span class="s2">(</span><span class="s1">x :Double</span><span class="s2">) </span><span class="s1">:Double </span><span class="s2">{</span>
+    <span class="s3">return </span><span class="s2">(</span><span class="s4">3.0</span><span class="s2">/</span><span class="s4">4.0</span><span class="s2">)*</span><span class="s1">x</span><span class="s2">.</span><span class="s1">pow</span><span class="s2">(-</span><span class="s4">1.0</span><span class="s2">/</span><span class="s4">4.0</span><span class="s2">) + </span><span class="s4">2</span><span class="s2">*</span><span class="s1">x</span><span class="s2">*</span><span class="s1">sin</span><span class="s2">(</span><span class="s1">x</span><span class="s2">.</span><span class="s1">pow</span><span class="s2">(</span><span class="s4">2.0</span><span class="s2">))</span>
+<span class="s2">}</span>
+<span class="s3">var </span><span class="s1">x_n : Double </span><span class="s2">= </span><span class="s4">1.0 </span><span class="s0">// tem que ser diferente de 0</span>
+<span class="s3">var </span><span class="s1">x_j : Double </span><span class="s2">= </span><span class="s4">0.0 </span><span class="s0">// x_n+1</span>
+
+<span class="s3">while</span><span class="s2">(</span><span class="s1">Math</span><span class="s2">.</span><span class="s1">abs</span><span class="s2">(</span><span class="s1">target</span><span class="s2">(</span><span class="s1">x_n</span><span class="s2">)) &gt; </span><span class="s1">err</span><span class="s2">){</span>
+    <span class="s3">if</span><span class="s2">(</span><span class="s1">x_n </span><span class="s2">&gt; </span><span class="s1">err</span><span class="s2">){</span>
+        <span class="s1">x_j </span><span class="s2">= </span><span class="s1">x_n </span><span class="s2">- </span><span class="s1">target</span><span class="s2">(</span><span class="s1">x_n</span><span class="s2">)/</span><span class="s1">target_line</span><span class="s2">(</span><span class="s1">x_n</span><span class="s2">)</span>
+        <span class="s1">println</span><span class="s2">(</span><span class="s5">&quot;xn = </span><span class="s3">${</span><span class="s1">x_n</span><span class="s3">} </span><span class="s5">e x_n+1 = </span><span class="s3">${</span><span class="s1">x_j</span><span class="s3">} \n</span><span class="s5">&quot;</span><span class="s2">)</span>
+        <span class="s1">x_n </span><span class="s2">= </span><span class="s1">x_j</span>
+        
+    <span class="s2">}</span>
+    <span class="s3">else</span><span class="s2">{</span>
+        <span class="s3">break</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+<span class="s0">#%% md 
+</span>
+<span class="s1">Resposta encontrada : 0.7743966632733174  
+</span><span class="s0">#%% md 
+</span><span class="s1">## Item (c)  
+Como $V(r) = \frac{-e^2}{4\pi \epsilon_0 r} + V_0e^{\frac{-r}{r_0}}$ e também $F(r) = \frac{-e^2}{4\pi \epsilon_0 r^2} + \frac{V_0}{r_o}e^{\frac{-r}{r_0} $ os gráficos do potêncial e da força, pedidos no ítem $I$ ficam :   
+</span><span class="s0">#%% 
+</span><span class="s3">fun </span><span class="s1">potencial</span><span class="s2">( </span><span class="s1">x : Double</span><span class="s2">) </span><span class="s1">:Double </span><span class="s2">{ </span>
+    <span class="s3">return </span><span class="s2">( -</span><span class="s4">14.4</span><span class="s2">/</span><span class="s1">x </span><span class="s2">) + </span><span class="s4">1380</span><span class="s2">* </span><span class="s1">exp</span><span class="s2">(-</span><span class="s1">x</span><span class="s2">/</span><span class="s4">0.328</span><span class="s2">)  </span>
+<span class="s2">}</span>
+<span class="s3">fun </span><span class="s1">force</span><span class="s2">( </span><span class="s1">x : Double</span><span class="s2">) </span><span class="s1">:Double</span><span class="s2">{</span>
+    <span class="s3">return </span><span class="s2">( -</span><span class="s4">14.4</span><span class="s2">/</span><span class="s1">x</span><span class="s2">.</span><span class="s1">pow</span><span class="s2">(</span><span class="s4">2.0</span><span class="s2">) ) + (</span><span class="s4">1380</span><span class="s2">/</span><span class="s4">0.328</span><span class="s2">)* </span><span class="s1">exp</span><span class="s2">(-</span><span class="s1">x</span><span class="s2">/</span><span class="s4">0.328</span><span class="s2">)</span>
+<span class="s2">}</span>
+<span class="s3">var </span><span class="s1">ys2 </span><span class="s2">= </span><span class="s1">xs</span><span class="s2">.</span><span class="s1">map </span><span class="s2">{</span><span class="s1">force</span><span class="s2">(</span><span class="s1">it</span><span class="s2">)}</span>
+<span class="s1">ys </span><span class="s2">= </span><span class="s1">xs</span><span class="s2">.</span><span class="s1">map </span><span class="s2">{ </span><span class="s1">potencial</span><span class="s2">(</span><span class="s1">it</span><span class="s2">) }</span>
+
+<span class="s3">val </span><span class="s1">data </span><span class="s2">= </span><span class="s1">mapOf</span><span class="s2">(</span>
+    <span class="s5">&quot;x&quot; </span><span class="s1">to xs</span><span class="s2">,</span>
+    <span class="s5">&quot;y&quot; </span><span class="s1">to ys</span><span class="s2">,</span>
+    <span class="s5">&quot;y2&quot; </span><span class="s1">to ys2</span>
+    
+<span class="s2">)</span>
+
+<span class="s3">val </span><span class="s1">plot </span><span class="s2">= </span><span class="s1">letsPlot</span><span class="s2">(</span><span class="s1">data</span><span class="s2">) + </span><span class="s1">geomLine</span><span class="s2">(</span><span class="s1">color </span><span class="s2">= </span><span class="s5">&quot;dark_green&quot;</span><span class="s2">, </span><span class="s1">alpha </span><span class="s2">= </span><span class="s4">.7</span><span class="s2">) {</span>
+    <span class="s1">x </span><span class="s2">= </span><span class="s5">&quot;x&quot;</span>
+    <span class="s1">y </span><span class="s2">= </span><span class="s5">&quot;y&quot;</span>
+<span class="s2">} + </span><span class="s1">geomLine</span><span class="s2">(</span><span class="s1">color </span><span class="s2">= </span><span class="s5">&quot;red&quot;</span><span class="s2">, </span><span class="s1">alpha </span><span class="s2">= </span><span class="s4">.7</span><span class="s2">){</span>
+    <span class="s1">x </span><span class="s2">= </span><span class="s5">&quot;x&quot;</span>
+    <span class="s1">y </span><span class="s2">= </span><span class="s5">&quot;y2&quot;</span>
+<span class="s2">}+</span><span class="s1">ggtitle</span><span class="s2">(</span><span class="s5">&quot;Plot das funções Potencial(x) e Force(x), X em Angstrong e Potencial em eV&quot;</span><span class="s2">) + </span><span class="s1">ggsize</span><span class="s2">(</span><span class="s4">700</span><span class="s2">, </span><span class="s4">500</span><span class="s2">) +</span><span class="s1">xlab</span><span class="s2">(</span><span class="s5">&quot;x&quot;</span><span class="s2">) + </span><span class="s1">ylab</span><span class="s2">(</span><span class="s5">&quot;potencial(x)&quot;</span><span class="s2">)+ </span><span class="s1">scaleFillBrewer</span><span class="s2">(</span><span class="s1">type </span><span class="s2">= </span><span class="s5">&quot;seq&quot;</span><span class="s2">) + </span><span class="s1">theme</span><span class="s2">(</span><span class="s1">panelGridMajorX </span><span class="s2">= </span><span class="s5">&quot;blank&quot;</span><span class="s2">)+ </span><span class="s1">scaleXContinuous</span><span class="s2">()</span>
+<span class="s1">plot</span>
+
+<span class="s0">// Distancias em Angstrong e potenciais em eletron-volts</span>
+<span class="s0">#%% md 
+</span><span class="s1">A função Potencial, em verde, foi plotada ao lado da função Força em vermelho.  
+&lt;p color = 'green'&gt; Potencial &lt;/p&gt; &lt;p color = 'red'&gt; Força &lt;/p&gt;&lt;br /&gt; 
+Abaixo vem uma implementação literal do método das secantes. Ele visa resolver a parte $II$ do ítem c. 
+ 
+</span><span class="s0">#%% 
+// Parte 2 do ítem (c). Para achar a região em que F(r) = 0 pelo método das secantes façamos : </span>
+<span class="s3">var </span><span class="s1">x_a : Double </span><span class="s2">= </span><span class="s4">1.0 </span><span class="s0">// x_n+1</span>
+<span class="s3">var </span><span class="s1">x_b : Double </span><span class="s2">= </span><span class="s4">2.0 </span><span class="s0">// x_n</span>
+<span class="s3">var </span><span class="s1">x_c : Double </span><span class="s2">= </span><span class="s4">3.0 </span><span class="s0">// x_n-1</span>
+<span class="s0">// err é um número arbitrariamente perto de 0, o qual nesse caso servirá para não fazer a segurança do programa.</span>
+<span class="s3">while </span><span class="s2">(</span><span class="s1">Math</span><span class="s2">.</span><span class="s1">abs</span><span class="s2">(</span><span class="s1">force</span><span class="s2">(</span><span class="s1">x_a</span><span class="s2">)) &gt; </span><span class="s1">err </span><span class="s2">){</span>
+    <span class="s3">if</span><span class="s2">(</span><span class="s1">x_a </span><span class="s2">&gt; </span><span class="s1">err </span><span class="s2">&amp;&amp; </span><span class="s1">x_b </span><span class="s2">&gt; </span><span class="s1">err </span><span class="s2">&amp;&amp; </span><span class="s1">x_c </span><span class="s2">&gt; </span><span class="s1">err </span><span class="s2">){</span>
+        <span class="s1">x_a </span><span class="s2">= </span><span class="s1">x_b </span><span class="s2">- (</span><span class="s1">force</span><span class="s2">(</span><span class="s1">x_b</span><span class="s2">)*(</span><span class="s1">x_b </span><span class="s2">- </span><span class="s1">x_c</span><span class="s2">))/(</span><span class="s1">force</span><span class="s2">(</span><span class="s1">x_b</span><span class="s2">) - </span><span class="s1">force</span><span class="s2">(</span><span class="s1">x_c</span><span class="s2">))</span>
+        <span class="s1">x_c </span><span class="s2">= </span><span class="s1">x_b</span>
+        <span class="s1">x_b </span><span class="s2">= </span><span class="s1">x_a</span>
+        <span class="s1">println</span><span class="s2">(</span><span class="s5">&quot;x_a = </span><span class="s3">${</span><span class="s1">x_a</span><span class="s3">}</span><span class="s5">, x_b = </span><span class="s3">${</span><span class="s1">x_b</span><span class="s3">}</span><span class="s5">, x_c = </span><span class="s3">${</span><span class="s1">x_c</span><span class="s3">}</span><span class="s5">&quot;</span><span class="s2">)</span>
+    <span class="s2">}</span><span class="s3">else</span><span class="s2">{</span>
+        <span class="s3">break</span>
+    <span class="s2">}</span>
+<span class="s2">} </span><span class="s0">// as unidades aqui usadas foram as mesmas indicadas no programa. (ev e Å)</span>
+<span class="s0">#%% md 
+</span><span class="s1">Resposta encontrada : 2.4500072105655226 Å 
+</span><span class="s0">#%% 
+</span></pre>
+</body>
+</html>
