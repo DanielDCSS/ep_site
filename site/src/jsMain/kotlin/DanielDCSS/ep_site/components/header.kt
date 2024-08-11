@@ -35,15 +35,19 @@ fun SimpleHeader() {
     Header {
         Div(attrs = {
             style {
-                property("background-color", "#333")
-                property("color", "white")
+                property("position", "fixed")    // Fixa o header no topo
+                property("top", "0")             // Posiciona no topo
+                property("left", "0")            // Alinha à esquerda
+                property("width", "100%")        // Ocupa toda a largura da viewport
+                property("background-color", dark)
+                property("color", orange_lighter)
                 property("padding", "1rem")
                 property("text-align", "left")
-                property("border-bottom", "1px solid #dee2e6")
-                property("width", "98.9vw")
+                property("border-bottom", "1px solid #e8c39e")
                 property("display", "flex")
                 property("justify-content", "space-between")
                 property("align-items", "center")
+                property("z-index", "1000")      // Garante que o header fique sobre outros elementos
             }
         }) {
             Div {
@@ -62,17 +66,14 @@ fun SimpleHeader() {
                 style {
                     property("color", "white")
                     property("display", "flex")
-                    property("align-items", "center")
-                    property("gap", "1.5rem")
+                    property("align-items", "left")
                 }
             }){
-                Image( "/bras2.png","Usp Logo", Modifier.height(4.cssRem).display(DisplayStyle.Block))
-                Row(Modifier.gap(1.5.cssRem).displayIfAtLeast(Breakpoint.MD), verticalAlignment = Alignment.CenterVertically) {
-                    EpsItems()
-                }
+                Image("/bras2.png", "Usp Logo", Modifier.height(5.cssRem).display(DisplayStyle.Block))
             }
         }
     }
 }
+
 
 

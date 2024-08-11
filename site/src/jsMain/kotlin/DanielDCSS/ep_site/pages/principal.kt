@@ -5,6 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
+import com.varabyte.kobweb.compose.foundation.layout.Row
+import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
@@ -15,11 +17,17 @@ import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.graphics.Image
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
+import DanielDCSS.ep_site.components.dark
+import DanielDCSS.ep_site.components.gray_dark
+import DanielDCSS.ep_site.components.gray_light
+import DanielDCSS.ep_site.components.orange_dark
+import DanielDCSS.ep_site.components.orange_lighter
 
 @Page
 @Composable
 
 fun principalPage() {
+    Bar()
     SimpleHeader()
     Column(
         modifier = Modifier.fillMaxSize()
@@ -30,7 +38,7 @@ fun principalPage() {
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start
     ) {
-        StyledH1("EP 1")
+        StyledH1("EP 1", id = "ep01")
 
         StyledH2("Dependências")
 
@@ -176,18 +184,19 @@ fun principalPage() {
         StyledP("Resposta encontrada : 2.4500072105655226 Å")
 
     } // Implementar navheader lateral. Estudar como rodar os códigos no navegdor e criar novos usuários
+
 }
 
 @Composable
 fun code_div( text: String) {
     Div(attrs = {
         style {
-            property("background-color", "#333")
-            property("color", "white")
+            property("background-color", dark)
+            property("color", orange_lighter)
             property("padding", "1rem")
             property("text-align", "left")
             property("border-bottom", "1px solid #dee2e6")
-            property("width", "90vw")
+            property("width", "80vw")
             property("display", "flex")
             property("justify-content", "space-between")
             property("align-items", "center")
@@ -215,13 +224,14 @@ fun graf(caminho: String){
     }
 }
 @Composable
-fun StyledH1(text: String) {
+fun StyledH1(text: String, id : String) {
     H1(attrs = {
+        id(id)
         style {
             fontSize(40.px)
-            color(Color("#333"))
+            color(Color(dark))
             marginBottom(16.px)
-            width(90.vw)
+            width(80.vw)
         }
     }) {
         Text(text.toString())
@@ -233,9 +243,9 @@ fun StyledH2(text: String) {
     H2(attrs = {
         style {
             fontSize(30.px)
-            color(Color("#333"))
+            color(Color(dark))
             marginBottom(12.px)
-            width(90.vw)
+            width(80.vw)
         }
     }) {
         Text(text.toString())
@@ -247,9 +257,9 @@ fun StyledH3(text: String) {
     H3(attrs = {
         style {
             fontSize(25.px)
-            color(Color("#333"))
+            color(Color(dark))
             marginBottom(8.px)
-            width(90.vw)
+            width(80.vw)
         }
     }) {
         Text(text.toString())
@@ -261,11 +271,65 @@ fun StyledP(text: String) {
     P(attrs = {
         style {
             fontSize(20.px)
-            color(Color("#333"))
+            color(Color(dark))
             marginBottom(16.px)
-            width(90.vw)
+            width(80.vw)
         }
     }) {
         Text(text.toString())
     }
 }
+@Composable
+fun p_bar(text: String, link: String) {
+    P( attrs = {
+        style {
+            fontSize(20.px)
+            color(Color(orange_dark))
+            marginLeft(30.px)
+            marginBottom(16.px)
+            width(50.px)
+        }
+    }) {
+        A(href = "#$link", attrs = {
+            style {
+                textDecoration("none") 
+                color(Color(orange_dark))
+            }
+        }) {
+            Text(text)
+        }
+    }
+}
+@Composable
+fun Bar() {
+    Row(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Spacer()
+
+        Column(
+            modifier = Modifier
+                .fillMaxHeight()
+                .width(13.vw)
+                .backgroundColor(Color(gray_dark))
+                .padding(top = 130.px)
+                .position(Position.Fixed)
+                .styleModifier {
+                    property("right", "0")
+                    property("border-left", "1px solid #e8c39e")
+                    paddingLeft(0.px)
+                },
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.Start
+        ) {
+            p_bar("- Ep 1", link = "ep01")
+            p_bar("- Ep 2", link = "ep02")
+            p_bar("- Ep 3", link = "ep03")
+            p_bar("- Ep 4", link = "ep04")
+            p_bar("- Ep 5", link = "ep05")
+        }
+    }
+}
+
+
+
